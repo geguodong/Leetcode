@@ -13,27 +13,28 @@
  *     }
  * }
  */
-class Solution {
-    List<List<Integer>> levels = new ArrayList<List<Integer>>();
-
-    public void helper(TreeNode node, int level) {
-        // start the current level
-        if (levels.size() == level)
-            levels.add(new ArrayList<Integer>());
-
-         // fulfil the current level
-         levels.get(level).add(node.val);
-
-         // process child nodes for the next level
-         if (node.left != null)
-            helper(node.left, level + 1);
-         if (node.right != null)
-            helper(node.right, level + 1);
-    }
-    
+class Solution {  
     public List<List<Integer>> levelOrder(TreeNode root) {
-        if (root == null) return levels;
-        helper(root, 0);
-        return levels;
+        List<List<Integer>> res = new ArrayList<>();
+        if(root == null) return res;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            List<Integer> level = new ArrayList<>();
+            while (size > 0) {
+                TreeNode cur = queue.poll();
+                level.add(cur.val);
+                if (cur.left != null) {
+                    queue.add(cur.left);
+                }
+                if (cur.right != null) {
+                    queue.add(cur.right);
+                }
+                size--;
+            }
+            res.add(level);
+        }
+        return res;
     }
 }
