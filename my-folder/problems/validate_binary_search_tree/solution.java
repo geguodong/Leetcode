@@ -15,8 +15,8 @@
  */
 
 /*
-Time complexity : \mathcal{O}(N)O(N) since we visit each node exactly once.
-Space complexity : \mathcal{O}(N)O(N) since we keep up to the entire tree.
+Time complexity : O(N) since we visit each node exactly once.
+Space complexity : O(N) since we keep up to the entire tree.
 */
 class Solution {
     public boolean validate(TreeNode root, Integer low, Integer high) {
