@@ -11,7 +11,8 @@ class Employee {
 Time Complexity: O(N), where NN is the number of employees. We might query each employee in dfs.
 Space Complexity: O(N), the size of the implicit call stack when evaluating dfs.
 */
-
+// DFS
+// O(N) O(N)
 class Solution {
     Map<Integer, Employee> emap;
     public int getImportance(List<Employee> employees, int queryid) {
