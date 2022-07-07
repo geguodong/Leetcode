@@ -1,7 +1,7 @@
 /*
 Heap
-Time complexity : \mathcal{O}(N \log k)O(Nlogk).
-Space complexity : \mathcal{O}(k)O(k) to store the heap elements.
+Time complexity : O(Nlogk).
+Space complexity : O(k) to store the heap elements.
 */
 
 class Solution {
