@@ -1,3 +1,5 @@
+// Three pointers 
+// O(n) O(1)
 class Solution {
     public void sortColors(int[] nums) {
         int p0 = 0, cur = 0;
@@ -11,7 +13,7 @@ class Solution {
             } else if (nums[cur] == 2) {
                 temp = nums[p2];
                 nums[p2--] = nums[cur];
-                nums[cur] = temp; 
+                nums[cur] = temp; // Be careful
             } else {
                 cur++;
             }
