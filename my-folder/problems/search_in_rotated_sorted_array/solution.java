@@ -1,5 +1,5 @@
 // Binary Search
-// o(logn) O?(1)
+// O(logn) O(1)
 
 class Solution {
   public int search(int[] nums, int target) {
