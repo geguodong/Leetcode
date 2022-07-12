@@ -13,6 +13,7 @@
  *     }
  * }
  */
+// O(N) O(N)
 class Solution {
     public List<List<Integer>> levelOrderBottom(TreeNode root) {
         List<List<Integer>> res = new ArrayList<>();
