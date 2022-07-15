@@ -21,6 +21,9 @@ Iterations
 Space complexity : \mathcal{O}(N)O(N) since in the worst case, when the tree is completely unbalanced, e.g. each node has only one child node, we would keep all NN nodes in the stack. But in the best case (the tree is balanced), the height of the tree would be \log(N)log(N). Therefore, the space complexity in this case would be \mathcal{O}(\log(N))O(log(N)).
 
 */
+// Iterator
+// O(N)
+// Worse O(N)  Average O(logn)
 class Solution {
   public boolean hasPathSum(TreeNode root, int sum) {
     if (root == null)
