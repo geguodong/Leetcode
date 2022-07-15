@@ -14,9 +14,9 @@
  * }
  */
 class Solution {
-    int[] nums;
+    
 
-    public TreeNode helper(int left, int right) {
+    public TreeNode helper(int[] nums, int left, int right) {
         if (left > right) return null;
 
         // always choose left middle node as a root
@@ -24,13 +24,12 @@ class Solution {
 
         // preorder traversal: node -> left -> right
         TreeNode root = new TreeNode(nums[p]);
-        root.left = helper(left, p - 1);
-        root.right = helper(p + 1, right);
+        root.left = helper(nums, left, p - 1);
+        root.right = helper(nums, p + 1, right);
         return root;
     }
 
     public TreeNode sortedArrayToBST(int[] nums) {
-        this.nums = nums;
-        return helper(0, nums.length - 1);
+        return helper(nums, 0, nums.length - 1);
     }
 }
