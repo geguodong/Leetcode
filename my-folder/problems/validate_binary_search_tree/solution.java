@@ -19,20 +19,25 @@ Time complexity : O(N) since we visit each node exactly once.
 Space complexity : O(N) since we keep up to the entire tree.
 */
 class Solution {
-    public boolean validate(TreeNode root, Integer low, Integer high) {
-        // Empty trees are valid BSTs.
-        if (root == null) {
-            return true;
-        }
-        // The current node's value must be between low and high.
-        if ((low != null && root.val <= low) || (high != null && root.val >= high)) {
-            return false;
-        }
-        // The left and right subtree must also be valid.
-        return validate(root.right, root.val, high) && validate(root.left, low, root.val);
-    }
-
     public boolean isValidBST(TreeNode root) {
-        return validate(root, null, null);
+        Deque<TreeNode> stack = new ArrayDeque<>();
+        Integer prev = null;
+
+        while (!stack.isEmpty() || root != null) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            // If next element in inorder traversal
+            // is smaller than the previous one
+            // that's not BST.
+            if (prev != null && root.val <= prev) {
+                return false;
+            }
+            prev = root.val;
+            root = root.right;
+        }
+        return true;
     }
 }
