@@ -1,3 +1,6 @@
+// Three pointer
+// Who smaller movw who, no need to be smallest
+// O(n) O(1)
 class Solution {
     public List<Integer> arraysIntersection(int[] arr1, int[] arr2, int[] arr3) {
         List<Integer> ans = new ArrayList <>();
