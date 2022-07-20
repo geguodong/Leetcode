@@ -1,3 +1,4 @@
+// Two pointer
 // O(n) O(1)
 class Solution {
     public int[] twoSum(int[] numbers, int target) {
@@ -6,7 +7,7 @@ class Solution {
         while (low < high) {
             int sum = numbers[low] + numbers[high];
             if (sum == target) {
-                return new int[] {++low, ++high};
+                return new int[] {low + 1, high + 1}; // note : 1-index
             } else if (sum < target) {
                 low++;
             } else {
