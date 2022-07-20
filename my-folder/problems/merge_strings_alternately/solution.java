@@ -1,3 +1,5 @@
+// Two Pointer
+// O(n) O(1)
 class Solution {
     public String mergeAlternately(String word1, String word2) {
         int first = 0, second = 0;
