@@ -11,7 +11,10 @@ public class Solution {
                 word.setLength(0);
             }
         }
-        result.append(word.reverse());
+        if(word.length() > 0) {
+            result.append(word.reverse());
+        }
+        
         return result.toString();
     }
 }
