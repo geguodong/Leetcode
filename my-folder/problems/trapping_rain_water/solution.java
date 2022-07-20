@@ -1,7 +1,7 @@
 /*
 Two Pointer
-Time complexity: O(n)O(n). Single iteration of O(n)O(n).
-Space complexity: O(1)O(1) extra space. Only constant space required for \text{left}left, \text{right}right, \text{left\_max}left_max and \text{right\_max}right_max.
+Time complexity: O(n) Single iteration of O(n).
+Space complexity: O(1) extra space. Only constant space required for left, right, left_max and right_max.
 */
 
 class Solution {
