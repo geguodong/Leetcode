@@ -1,5 +1,5 @@
 /*
-O(m + n)
+O(mn)
 O(1)
 */
 class Solution {
