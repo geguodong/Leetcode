@@ -1,5 +1,5 @@
 /*
-Time Complexity: O(M + N)O, where M, NM,N are the lengths of A and B respectively.
+Time Complexity: O(M + N), where M, NM,N are the lengths of A and B respectively.
 Space Complexity: O(M + N)
 */
 class Solution {
