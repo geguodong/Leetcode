@@ -9,8 +9,8 @@ class Solution {
                     result.add(words[i]) ;
             }   
         }
-        List<String> l1=new ArrayList<>();
-        l1.addAll(result);
+        List<String> l1=new ArrayList<>(result);
+       // l1.addAll(result);
         return l1;
     }
 }
