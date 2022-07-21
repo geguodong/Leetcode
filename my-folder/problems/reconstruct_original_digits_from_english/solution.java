@@ -1,8 +1,8 @@
 /*
 HashMap
-Time complexity : \mathcal{O}(N)O(N) where N is a number of characters in the input string. \mathcal{O}(N)O(N) time is needed to compute hashmap count "letter -> its frequency in the input string". Then we deal with a data structure out which contains 10 elements only and all operations are done in a constant time.
+Time complexity : O(N) where N is a number of characters in the input string. O(N) time is needed to compute hashmap count "letter -> its frequency in the input string". Then we deal with a data structure out which contains 10 elements only and all operations are done in a constant time.
 
-Space complexity : \mathcal{O}(1)O(1). count contains constant number of elements since input string contains only lowercase English letters, and out contains not more than 10 elements.
+Space complexity : O(1). count contains constant number of elements since input string contains only lowercase English letters, and out contains not more than 10 elements.
 
 */
 
