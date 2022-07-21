@@ -10,22 +10,21 @@ class Solution {
         StringBuilder str = new StringBuilder();
         
         while(total>0){
-
-        for(int i=0;i<map.length;i++){
-            if(map[i]>0){
-                map[i]--;
-                total--;
-                str.append((char) (i+'a'));
+            for(int i = 0;i < map.length;i++){
+                if(map[i]>0){
+                    map[i]--;
+                    total--;
+                    str.append((char) (i + 'a'));
+                }
             }
-        }
 
-        for(int i=map.length-1;i>=0;i--){
-            if(map[i]>0){
-                map[i]--;
-                total--;
-                str.append((char) (i+'a'));
+            for(int i = map.length-1;i >= 0;i--){
+                if(map[i]>0){
+                    map[i]--;
+                    total--;
+                    str.append((char) (i + 'a'));
+                }
             }
-        }
         }
         return str.toString();
     }
