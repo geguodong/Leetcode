@@ -6,7 +6,7 @@ class Solution {
         for(int n: nums){
             arr[n]++;
             if(arr[n]==1) sum+=n;
-            else if(arr[n]==2) sum-=n;
+            else if(arr[n] == 2) sum-=n; // reduce once
         }
 
         return sum;
