@@ -1,3 +1,4 @@
+// O(N) O(N)
 class Solution {
 	public int countPoints(String rings) {
 		HashSet<Character>[]rods=new HashSet[10];
