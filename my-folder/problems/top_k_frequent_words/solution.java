@@ -1,3 +1,5 @@
+// Heap + HeashMap
+// O(nlogn) O(n)
 class Solution {
      public List<String> topKFrequent(String[] words, int k) {
         // map word to its frequency
@@ -10,9 +12,9 @@ class Solution {
         PriorityQueue<String> pq = new PriorityQueue<>(new Comparator<String>() {
             public int compare(String a, String b) {
                 if(map.get(a) != map.get(b)) { // different frequency
-                    return map.get(a) - map.get(b);
+                    return map.get(a) - map.get(b); // minHeap
                 } else { // same frequency
-                    return b.compareTo(a);
+                    return b.compareTo(a);  
                 }
             }
         });
