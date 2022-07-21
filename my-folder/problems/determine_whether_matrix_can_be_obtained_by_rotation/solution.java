@@ -1,3 +1,5 @@
+// O(mn)
+// O(mn)
 class Solution {
     public static boolean findRotation(int[][] mat, int[][] target) {
 
