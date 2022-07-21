@@ -1,3 +1,4 @@
+// O(n) O(n)
 class Solution {
     public int[] fairCandySwap(int[] A, int[] B) {
         int sa = 0, sb = 0;  // sum of A, B respectively
