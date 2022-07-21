@@ -1,3 +1,5 @@
+// Heap + HashMap
+// O(nlogn) O(n)
 class Solution {
     public int[] frequencySort(int[] nums) {
         Map<Integer, Integer> map = new HashMap<>();
