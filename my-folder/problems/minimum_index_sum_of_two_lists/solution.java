@@ -4,6 +4,12 @@ Time complexity :O(l1+l2). Every item of list2 is checked in a map of list1list1
 Space complexity : O(l1∗x). hashmap size grows upto l_1∗x, where xx refers to average string length.
 */
 
+/*
+Time complexity :O(l1+l2). Every item of list2 is checked in a map of list1list1. l1 and l2 are the lengths of list1list1 and list2list2 respectively.
+
+Space complexity : O(l1∗x). hashmap size grows upto l_1∗x, where xx refers to average string length.
+*/
+
 public class Solution {
     public String[] findRestaurant(String[] list1, String[] list2) {
         HashMap < String, Integer > map = new HashMap < String, Integer > ();
