@@ -1,18 +1,25 @@
 // Two pointer
 class Solution {
-    public String reverseOnlyLetters(String S) {
-        StringBuilder ans = new StringBuilder();
-        int j = S.length() - 1;
-        for (int i = 0; i < S.length(); ++i) {
-            if (Character.isLetter(S.charAt(i))) {
-                while (!Character.isLetter(S.charAt(j)))
-                    j--;
-                ans.append(S.charAt(j--));
-            } else {
-                ans.append(S.charAt(i));
+    public String reverseOnlyLetters(String s) {
+      char [] A = s.toCharArray();
+        int start=0;
+        int end=s.length()-1;
+        while(start<end)
+        {
+            if(!Character.isLetter(A[start])){
+                start++;
+            }else if(!Character.isLetter(A[end])){
+                end--;
+            }     
+            else
+            {
+                char temp=A[start];
+                A[start]=A[end];
+                A[end]=temp;
+                start++;
+                end--;
             }
-        }
-
-        return ans.toString();
+     }
+      return new String(A);                           
     }
 }
