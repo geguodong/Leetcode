@@ -4,6 +4,6 @@ class Solution {
         for(int i = 0;i<sol.length;i++){
             sol[indices[i]] = s.charAt(i);
         }
-        return String.valueOf(sol);
+        return new String(sol);
     }
 }
