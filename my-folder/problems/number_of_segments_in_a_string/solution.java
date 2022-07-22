@@ -1,15 +1,14 @@
 /*
-O(n)
-O(1)
+O(n) O(1)
 */
 class Solution {
     public int countSegments(String s) {
         int segmentCount = 0;
         for (int i = 0; i < s.length(); i++) {
             if ((i == 0 || s.charAt(i-1) == ' ') && s.charAt(i) != ' ') {
-                segmentCount++;
-            }
+            segmentCount++;
         }
-        return segmentCount;
+    }
+    return segmentCount;
     }
 }
