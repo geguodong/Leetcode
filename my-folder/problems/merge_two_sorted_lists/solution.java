@@ -12,20 +12,33 @@
 // Iteration
 // O(m + n) O(1)
 class Solution {
-    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        ListNode prehead = new ListNode(-1);
-        ListNode pre = prehead;
-        while (l1 != null && l2 != null) {
-            if (l1.val < l2.val) {
-                pre.next = l1;
-                l1 = l1.next;
+    ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        // 虚拟头结点
+        ListNode dummy = new ListNode(-1), p = dummy;
+        ListNode p1 = l1, p2 = l2;
+
+        while (p1 != null && p2 != null) {
+            // 比较 p1 和 p2 两个指针
+            // 将值较小的的节点接到 p 指针
+            if (p1.val > p2.val) {
+                p.next = p2;
+                p2 = p2.next;
             } else {
-                pre.next = l2;
-                l2 = l2.next;
+                p.next = p1;
+                p1 = p1.next;
             }
-            pre = pre.next;
+            // p 指针不断前进
+            p = p.next;
         }
-        pre.next = l1 == null ? l2 : l1;
-        return prehead.next;
+
+        if (p1 != null) {
+            p.next = p1;
+        }
+
+        if (p2 != null) {
+            p.next = p2;
+        }
+
+        return dummy.next;
     }
 }
