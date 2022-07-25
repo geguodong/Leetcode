@@ -8,32 +8,30 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
-/*
-Time complexity : O(N\log k)O(Nlogk) where \text{k}k is the number of linked lists.
-
-The comparison cost will be reduced to O(\log k)O(logk) for every pop and insertion to priority queue. But finding the node with the smallest value just costs O(1)O(1) time.
-There are NN nodes in the final linked list.
-Space complexity :
-
-O(n)O(n) Creating a new linked list costs O(n)O(n) space.
-O(k)O(k) The code above present applies in-place method which cost O(1)O(1) space. And the priority queue (often implemented with heaps) costs O(k)O(k) space (it's far less than NN in most situations).
-*/
 class Solution {
-    public ListNode mergeKLists(ListNode[] lists) {
-        PriorityQueue<ListNode> minHeap = new PriorityQueue<>((a, b) -> Integer.compare(a.val, b.val));
-        
-        for(ListNode node: lists){
-            if(node != null)
-                minHeap.add(node);
+    ListNode mergeKLists(ListNode[] lists) {
+        if (lists.length == 0) return null;
+        // 虚拟头结点
+        ListNode dummy = new ListNode(-1);
+        ListNode p = dummy;
+        // 优先级队列，最小堆
+        PriorityQueue<ListNode> pq = new PriorityQueue<>(
+            lists.length, (a, b)->(a.val - b.val));
+        // 将 k 个链表的头结点加入最小堆
+        for (ListNode head : lists) {
+            if (head != null)
+                pq.add(head);
         }
-        
-        ListNode dummy = new ListNode(0), cur = dummy;
-        while(!minHeap.isEmpty()){
-            ListNode minNode = minHeap.remove();
-            cur.next = minNode;
-            if(minNode.next != null)
-                minHeap.add(minNode.next);
-            cur = cur.next;
+
+        while (!pq.isEmpty()) {
+            // 获取最小节点，接到结果链表中
+            ListNode node = pq.poll();
+            p.next = node;
+            if (node.next != null) {
+                pq.add(node.next);
+            }
+            // p 指针不断前进
+            p = p.next;
         }
         return dummy.next;
     }
