@@ -13,26 +13,23 @@
  *     }
  * }
  */
-// iteration
-// O(n) O(n)
 class Solution {
-    public TreeNode convertBST(TreeNode root) {
-        Stack<TreeNode> stack = new Stack<>();
-        TreeNode cur = root;
-        int sum = 0;
-        while (!stack.isEmpty() || cur != null) {
-            while (cur != null) {
-                stack.push(cur);
-                cur = cur.right;
-            }
-            
-            cur = stack.pop();
-            sum += cur.val;
-            cur.val = sum;
-            
-            cur = cur.left;
-        }
+    TreeNode convertBST(TreeNode root) {
+        traverse(root);
         return root;
     }
-}
 
+    // 记录累加和
+    int sum = 0;
+    void traverse(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        traverse(root.right);
+        // 维护累加和
+        sum += root.val;
+        // 将 BST 转化成累加树
+        root.val = sum;
+        traverse(root.left);
+    }
+}
