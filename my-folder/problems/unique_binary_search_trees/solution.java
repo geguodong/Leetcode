@@ -1,16 +1,29 @@
-// DP
-// G(N^2) G(N)
-public class Solution {
-  public int numTrees(int n) {
-    int[] G = new int[n + 1];
-    G[0] = 1;
-    G[1] = 1;
+class Solution {
+    // 备忘录
+    int[][] memo;
 
-    for (int i = 2; i <= n; ++i) {
-      for (int j = 1; j <= i; ++j) {
-        G[i] += G[j - 1] * G[i - j];
-      }
+    int numTrees(int n) {
+        // 备忘录的值初始化为 0
+        memo = new int[n + 1][n + 1];
+        return count(1, n);
     }
-    return G[n];
-  }
+
+    int count(int lo, int hi) {
+        if (lo > hi) return 1;
+        // 查备忘录
+        if (memo[lo][hi] != 0) {
+            return memo[lo][hi];
+        }
+
+        int res = 0;
+        for (int mid = lo; mid <= hi; mid++) {
+            int left = count(lo, mid - 1);
+            int right = count(mid + 1, hi);
+            res += left * right;
+        }
+        // 将结果存入备忘录
+        memo[lo][hi] = res;
+
+        return res;
+    }
 }
