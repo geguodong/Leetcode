@@ -1,26 +1,18 @@
-// Back tracking
+
 class Solution {
+    private List<String> all = new LinkedList<>();
+
     public List<String> generateParenthesis(int n) {
-        List<String> ans = new ArrayList();
-        backtrack(ans, new StringBuilder(), 0, 0, n);
-        return ans;
+        backtrack("", n, n);
+        return all;
     }
 
-    public void backtrack(List<String> ans, StringBuilder cur, int open, int close, int max){
-        if (cur.length() == max * 2) {
-            ans.add(cur.toString());
+    private void backtrack(String now, int l, int r){
+        if(l+r==0){
+            all.add(now);
             return;
         }
-
-        if (open < max) {
-            cur.append("(");
-            backtrack(ans, cur, open+1, close, max);
-            cur.deleteCharAt(cur.length() - 1);
-        }
-        if (close < open) {
-            cur.append(")");
-            backtrack(ans, cur, open, close+1, max);
-            cur.deleteCharAt(cur.length() - 1);
-        }
+        if(l>0) backtrack(now+'(', l-1, r);
+        if(l<r) backtrack(now+')', l, r-1);
     }
 }
