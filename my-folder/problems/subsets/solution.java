@@ -1,30 +1,19 @@
-// BackTracking
-// O(N * 2^N) O(N)
 class Solution {
-  List<List<Integer>> output = new ArrayList();
-  int n;
-
-  public void backtrack(int first, ArrayList<Integer> curr, int[] nums, int k) {
-    // if the combination is done
-    if (curr.size() == k) {
-      output.add(new ArrayList(curr));
-      return;
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        LinkedList<Integer> current = new LinkedList<>();
+        backtrack(nums, 0, res, current);
+        return res;
     }
-    for (int i = first; i < n; ++i) {
-      // add i into the current combination
-      curr.add(nums[i]);
-      // use next integers to complete the combination
-      backtrack(i + 1, curr, nums, k);
-      // backtrack
-      curr.remove(curr.size() - 1);
+    
+    private void backtrack(int[] nums, int index, List<List<Integer>> res, LinkedList<Integer> cur) {
+        res.add(new LinkedList(cur));
+        
+        for(int i = index; i < nums.length; i++) {
+            cur.add(nums[i]);
+            backtrack(nums, i + 1, res, cur);
+            cur.removeLast();
+        }
     }
-  }
-
-  public List<List<Integer>> subsets(int[] nums) {
-    n = nums.length;
-    for (int k = 0; k < n + 1; ++k) {
-      backtrack(0, new ArrayList<Integer>(), nums, k);
-    }
-    return output;
-  }
+    
 }
