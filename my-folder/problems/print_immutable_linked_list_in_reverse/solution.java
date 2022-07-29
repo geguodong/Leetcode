@@ -9,23 +9,24 @@
 
 class Solution {
     public void printLinkedListInReverse(ImmutableListNode head) {
-        Stack<ImmutableListNode> stack = new Stack<ImmutableListNode>();
-        
-        if (head==null)
-            return;
+        Stack<ImmutableListNode> stack = new Stack<ImmutableListNode>(); 
+        if (head==null) {
+           return; 
+        }
+             
         if (head.getNext() == null) {
             head.printValue();
             return;
         }
-        
+
         ImmutableListNode node = head;
         while (node != null) {
-            stack.push(node);
-            node=node.getNext();
-        }
-        
+             stack.push(node);
+             node=node.getNext();
+         }
+
         while(!stack.isEmpty()) {
-            stack.pop().printValue();
-        }
+             stack.pop().printValue();
+         }
     }
 }
