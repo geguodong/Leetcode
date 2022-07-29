@@ -14,12 +14,10 @@
  * }
  */
 
-
 class Solution {
     public boolean isSubtree(TreeNode root, TreeNode subRoot) {
         return bfs(root, subRoot);
     }
-    
     boolean bfs(TreeNode r, TreeNode s) {
         if (r != null) {
             Queue<TreeNode> q = new LinkedList();
@@ -32,12 +30,13 @@ class Solution {
                 }
                 if (rk.left != null) {
                     q.add(rk.left);
-                }        
+                }
+
             }
         }
         return false;
     }
-    
+
     boolean check(TreeNode r, TreeNode s) {
         if (s == null && r == null) return true;
         if (r != null && s != null && r.val == s.val) {
@@ -46,4 +45,5 @@ class Solution {
             return false;
         }
     }
+
 }
