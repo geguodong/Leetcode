@@ -14,22 +14,20 @@
  * }
  */
 class Solution {
-	List<Integer> list = new ArrayList<>();
-    
     public List<Integer> getLonelyNodes(TreeNode root) {
-        fun(root);
+        List<Integer> list = new ArrayList<>();
+        fun(root, list);
         return list;
-	}
+    }
     
-	void fun(TreeNode root) {
-		if(root==null) return;
-		fun(root.left);
-		fun(root.right);
-
-		if(root.left==null && root.right!=null)
-			list.add(root.right.val);
-		if(root.right==null && root.left!=null)
-			list.add(root.left.val);
-	}
+    void fun(TreeNode root, List<Integer> list) {
+        if(root==null) return;
+        if(root.left==null && root.right!=null)
+        list.add(root.right.val);
+        if(root.right==null && root.left!=null)
+        list.add(root.left.val);
+        fun(root.left, list);
+        fun(root.right, list);
+    }
 
 }
