@@ -1,39 +1,36 @@
-
-// BackTracking
-// Time Complexity: O(2^n)
-// Space Complexity: O(N)   
 class Solution {
+    
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
-        List<List<Integer>> results = new ArrayList<>();
-        LinkedList<Integer> comb = new LinkedList<>();
-
+        
+        List<List<Integer>> res = new ArrayList<>();
+        LinkedList<Integer> path = new LinkedList<>();
+        if(candidates.length == 0) {
+            return res;
+        }
         Arrays.sort(candidates);
-
-        backtrack(candidates, comb, target, 0, results);
-        return results;
+        backtrack(candidates, 0,  res, path, 0, target);
+        return res;
     }
-
-    private void backtrack(int[] candidates, LinkedList<Integer> comb,
-                           Integer remain, Integer curr,
-                           List<List<Integer>> results) {
-        if (remain == 0) {
-            // copy the current combination to the final list.
-            results.add(new ArrayList<Integer>(comb));
+    
+    private void backtrack(int[] candidates, int start, List<List<Integer>> res, LinkedList<Integer> path, int curSum, int target) {
+        if(curSum == target) {
+            res.add(new LinkedList<>(path));
             return;
         }
-
-        for (int nextCurr = curr; nextCurr < candidates.length; ++nextCurr) {
-            if (nextCurr > curr && candidates[nextCurr] == candidates[nextCurr - 1])
-                continue;
-
-            Integer pick = candidates[nextCurr];
-            // optimization: early stopping
-            if (remain - pick < 0)
-                break;
-
-            comb.addLast(pick);
-            backtrack(candidates, comb, remain - pick, nextCurr + 1, results);
-            comb.removeLast();
+        
+        if(curSum > target) {
+            return;
         }
-    }
+        
+        for(int i = start; i < candidates.length; i++) {
+            if (i > start && candidates[i] == candidates[i - 1]) {
+                continue;
+            }
+            curSum += candidates[i];
+            path.add(candidates[i]);
+            backtrack(candidates, i + 1, res, path, curSum, target);
+            curSum -= candidates[i];
+            path.removeLast();
+        }
+    }     
 }
