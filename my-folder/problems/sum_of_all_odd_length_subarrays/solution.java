@@ -1,25 +1,18 @@
 class Solution {
     public int sumOddLengthSubarrays(int[] arr) {
-        int size = 1;
-        int sum = 0;
-        while(size <= arr.length){
-            int curSum = 0;
-            for(int i = 0; i < arr.length; i++){
-                if(i <= size - 1){
-                    curSum += arr[i];
-                }
-                else{
-                    sum += curSum;
-                    curSum += arr[i];
-                    curSum -= arr[i - size];
+        int sumf=0;
+
+        for(int i=0;i<arr.length;i++){
+                int sumx=0,k=1;
+                for(int j=i;j<arr.length;j++){
+                    sumx+=arr[j];
+
+                    if(k%2!=0){
+                        sumf+=sumx;
+                    }
+                    k++;   
                 }
             }
-            sum += curSum;
-            size += 2;
-        }
-        return sum;
+         return sumf;
     }
 }
-// Time complexity: O(N * ((N+1)/2))
-// N is the number of elements in arr
-// Space complexity: O(1)
