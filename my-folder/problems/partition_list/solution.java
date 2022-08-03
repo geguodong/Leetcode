@@ -27,7 +27,7 @@ class Solution {
                 p1.next = p;
                 p1 = p1.next;
             }
-            // 断开原链表中的每个节点的 next 指针
+            //断开原链表中的每个节点的 next 指针
             ListNode temp = p.next;
             p.next = null;
             p = temp;
