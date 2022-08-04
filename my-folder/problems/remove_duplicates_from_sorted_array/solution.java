@@ -1,16 +1,12 @@
-// O(N) O(1)
 class Solution {
     public int removeDuplicates(int[] nums) {
-        if (nums == null || nums.length == 0) return 0;
-        int last = 0;;
-        for (int i = 1; i < nums.length; i++) {
-            if (nums[last] != nums[i]) {
-                last++;
-                nums[last] = nums[i];
-           //     res++;
+        int i = 0;
+        for (int j = 1; j < nums.length; j++) {
+            if(nums[i] != nums[j]) {
+                i++;
+                nums[i] = nums[j];
             }
         }
-       // return res;
-        return last + 1; // index + 1  == num
+        return i + 1;
     }
 }
