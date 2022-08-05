@@ -1,3 +1,13 @@
+/*
+As we calculate shortly before, there could be at most 2^N−1  −1 possible paths in the graph.
+
+For each path, there could be at most N−2 intermediate nodes, i.e. it takes O(N) time to build a path.
+
+To sum up, a loose upper-bound on the time complexity of the algorithm would be O(2^N⋅N)
+
+Space Complexity: (2^N⋅N) (result)   or O(n) recursion call
+
+*/
 class Solution {
     // 记录所有路径
     List<List<Integer>> res = new LinkedList<>();
