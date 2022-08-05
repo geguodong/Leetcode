@@ -1,29 +1,34 @@
-/*
-Depth-First Search
-Time Complexity: O(N+E), where NN is the number of rooms, and EE is the total number of keys.
-Space Complexity: O(N) in additional space complexity, to store stack and seen.
-*/
-
+// BFS
+// O(N + E)
+// O(N)
 class Solution {
     public boolean canVisitAllRooms(List<List<Integer>> rooms) {
-        boolean[] seen = new boolean[rooms.size()];
-        seen[0] = true;
-        Stack<Integer> stack = new Stack();
-        stack.push(0);
-
-        //At the beginning, we have a todo list "stack" of keys to use.
-        //'seen' represents at some point we have entered this room.
-        while (!stack.isEmpty()) { // While we have keys...
-            int node = stack.pop(); // Get the next key 'node'
-            for (int nei: rooms.get(node)) // For every key in room # 'node'...
-                if (!seen[nei]) { // ...that hasn't been used yet
-                    seen[nei] = true; // mark that we've entered the room
-                    stack.push(nei); // add the key to the todo list
-                }
+        if(rooms == null || rooms.size() == 0) {
+            return true;
         }
-
-        for (boolean v: seen)  // if any room hasn't been visited, return false
-            if (!v) return false;
+        
+        Queue<Integer> queue = new LinkedList<>();
+        boolean[] visited = new boolean[rooms.size()];
+        
+        queue.add(0);
+        
+        while(!queue.isEmpty()) {
+            int curRoom = queue.poll();
+            if(visited[curRoom]) {
+                continue;
+            }
+            visited[curRoom] = true;
+            
+            for(int room : rooms.get(curRoom)) {
+                queue.add(room);
+            }
+        }
+        
+        for(boolean room : visited) {
+            if(room == false) {
+                return false;
+            }
+        }
         return true;
     }
 }
