@@ -1,5 +1,7 @@
-// DP Buttom Up
-// O(S * N) O(S)
+/*
+DP : O(SN)
+O(S)
+*/
 public class Solution {
   public int coinChange(int[] coins, int amount) {
     int max = amount + 1;
