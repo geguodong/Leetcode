@@ -1,71 +1,57 @@
-// Topological Sort
-class GNode {
-  public Integer inDegrees = 0;
-  public List<Integer> outNodes = new LinkedList<Integer>();
-}
-
-
 class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
 
-  public boolean canFinish(int numCourses, int[][] prerequisites) {
+    boolean isPossible = true;
+    Map<Integer, List<Integer>> adjList = new HashMap<Integer, List<Integer>>();
+    int[] indegree = new int[numCourses];
+    int[] topologicalOrder = new int[numCourses];
 
-    if (prerequisites.length == 0)
-      return true; // no cycle could be formed in empty graph.
+    // Create the adjacency list representation of the graph
+    for (int i = 0; i < prerequisites.length; i++) {
+      int dest = prerequisites[i][0];
+      int src = prerequisites[i][1];
+      List<Integer> lst = adjList.getOrDefault(src, new ArrayList<Integer>());
+      lst.add(dest);
+      adjList.put(src, lst);
 
-    // course -> list of next courses
-    HashMap<Integer, GNode> graph = new HashMap<>();
-
-    // build the graph first
-    for (int[] relation : prerequisites) {
-      // relation[1] -> relation[0]
-      GNode prevCourse = this.getCreateGNode(graph, relation[1]);
-      GNode nextCourse = this.getCreateGNode(graph, relation[0]);
-
-      prevCourse.outNodes.add(relation[0]);
-      nextCourse.inDegrees += 1;
+      // Record in-degree of each vertex
+      indegree[dest] += 1;
     }
 
-    // We start from courses that have no prerequisites.
-    int totalDeps = prerequisites.length;
-    LinkedList<Integer> nodepCourses = new LinkedList<Integer>();
-    for (Map.Entry<Integer, GNode> entry : graph.entrySet()) {
-      GNode node = entry.getValue();
-      if (node.inDegrees == 0)
-        nodepCourses.add(entry.getKey());
-    }
-
-    int removedEdges = 0;
-    while (nodepCourses.size() > 0) {
-      Integer course = nodepCourses.pop();
-
-      for (Integer nextCourse : graph.get(course).outNodes) {
-        GNode childNode = graph.get(nextCourse);
-        childNode.inDegrees -= 1;
-        removedEdges += 1;
-        if (childNode.inDegrees == 0)
-          nodepCourses.add(nextCourse);
+    // Add all vertices with 0 in-degree to the queue
+    Queue<Integer> q = new LinkedList<Integer>();
+    for (int i = 0; i < numCourses; i++) {
+      if (indegree[i] == 0) {
+        q.add(i);
       }
     }
 
-    if (removedEdges != totalDeps)
-      // if there are still some edges left, then there exist some cycles
-      // Due to the dead-lock (dependencies), we cannot remove the cyclic edges
-      return false;
-    else
-      return true;
-  }
+    int i = 0;
+    // Process until the Q becomes empty
+    while (!q.isEmpty()) {
+      int node = q.remove();
+      topologicalOrder[i++] = node;
 
-  /**
-   * Retrieve the existing <key, value> from graph, otherwise create a new one.
-   */
-  protected GNode getCreateGNode(HashMap<Integer, GNode> graph, Integer course) {
-    GNode node = null;
-    if (graph.containsKey(course)) {
-      node = graph.get(course);
-    } else {
-      node = new GNode();
-      graph.put(course, node);
+      // Reduce the in-degree of each neighbor by 1
+      if (adjList.containsKey(node)) {
+        for (Integer neighbor : adjList.get(node)) {
+          indegree[neighbor]--;
+
+          // If in-degree of a neighbor becomes 0, add it to the Q
+          if (indegree[neighbor] == 0) {
+            q.add(neighbor);
+          }
+        }
+      }
     }
-    return node;
-  }
+
+    // Check to see if topological sort is possible or not.
+//     if (i == numCourses) {
+//       return topologicalOrder;
+//     }
+
+//     return new int[0];   
+        
+        return i == numCourses;
+    }
 }
