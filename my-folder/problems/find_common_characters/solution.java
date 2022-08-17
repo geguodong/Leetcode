@@ -1,3 +1,8 @@
+/*
+Use substring to remove target characters in each word
+O(mn)
+o(mn)
+*/
 class Solution {
  public  String compare(String s1, String s2){
 		String res="";
