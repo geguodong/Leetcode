@@ -1,5 +1,4 @@
-// Left and Right product lists
-// O(N) O(1)
+// O(N)   O(1)
 class Solution {
     public int[] productExceptSelf(int[] nums) {
 
