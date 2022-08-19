@@ -1,6 +1,6 @@
 class Solution {
     public boolean canBeIncreasing(int[] nums) {
-        
+        // use boolean to check met i + 1 <= i or not
         boolean canRemoveItem = true;
         int last=nums[0];
         for(int i=1;i<nums.length;i++){
@@ -10,7 +10,9 @@ class Solution {
                     canRemoveItem=false;
                    
                     // if i is the last item just remove it
-                    if(i==nums.length-1) return true;
+                    if(i==nums.length-1) {
+                        return true;
+                    }
                     
                     // Note : need to make sure nums[i] > nums[i - 2]
                     // can remove item at index i
