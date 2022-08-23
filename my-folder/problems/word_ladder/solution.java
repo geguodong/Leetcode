@@ -1,7 +1,3 @@
-// BFS to traverse all words
-// M the length of word, N the number of words in wordList
-// Note substring is O(M); O(M*N*M + M*M*N) = O(M*M*N)
-// VISITED O(M) wordDir O(M*N*M)
 class Solution {
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
         if(!wordList.contains(endWord)) {
