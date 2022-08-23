@@ -8,7 +8,6 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
-
 // Iteration
 // O(m + n) O(1)
 class Solution {
