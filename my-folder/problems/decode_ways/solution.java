@@ -1,4 +1,3 @@
-// O(n) O(1)
 class Solution {
     public int numDecodings(String s) {  
         if (s.charAt(0) == '0') {
