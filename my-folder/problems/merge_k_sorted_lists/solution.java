@@ -10,7 +10,10 @@
  */
 class Solution {
     ListNode mergeKLists(ListNode[] lists) {
-        if (lists.length == 0) return null;
+        if (lists.length == 0) {
+            return null;
+        }
+            
         // 虚拟头结点
         ListNode dummy = new ListNode(-1);
         ListNode p = dummy;
@@ -19,8 +22,9 @@ class Solution {
             lists.length, (a, b)->(a.val - b.val));
         // 将 k 个链表的头结点加入最小堆
         for (ListNode head : lists) {
-            if (head != null)
+            if (head != null) {
                 pq.add(head);
+            }        
         }
 
         while (!pq.isEmpty()) {
@@ -35,4 +39,6 @@ class Solution {
         }
         return dummy.next;
     }
+    
 }
+   
