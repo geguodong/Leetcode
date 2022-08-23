@@ -1,52 +1,67 @@
+// O(S + T) O(S + T)
 class Solution {
-    public String minWindow( String s, String t ) {
-        String res = "";
-        if ( t.length() > s.length() ) {
-            return res;
+    public String minWindow(String s, String t) {
+
+        if (s.length() == 0 || t.length() == 0) {
+            return "";
         }
 
-        HashMap<Character, Integer> need = new HashMap<>();
-        HashMap<Character, Integer> window = new HashMap<>();
+        Map<Character, Integer> dictT = new HashMap<Character, Integer>();
 
-        for ( int i = 0; i < t.length(); i++ ) {
-            char ch = t.charAt( i );
-            need.put( ch, need.getOrDefault( ch, 0 ) + 1 );
+        for (int i = 0; i < t.length(); i++) {
+            int count = dictT.getOrDefault(t.charAt(i), 0);
+            dictT.put(t.charAt(i), count + 1);
         }
-        int l = 0;
-        int r = 0;
-        int valid = 0;
-        int len = Integer.MAX_VALUE;
-        int start = 0;
-        while ( r < s.length() ) {
-            char ch = s.charAt( r );
-            r++;
-            if ( need.containsKey( ch ) ) {
-                window.put( ch, window.getOrDefault( ch, 0 ) + 1 );
-                if ( window.get( ch ).equals( need.get( ch ) ) ) {
-                    valid++;
-                }
+
+        int required = dictT.size();
+
+        // Filter all the characters from s into a new list along with their index.
+        // The filtering criteria is that the character should be present in t.
+        List<Pair<Integer, Character>> filteredS = new ArrayList<Pair<Integer, Character>>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (dictT.containsKey(c)) {
+                filteredS.add(new Pair<Integer, Character>(i, c));
             }
-            // 判断左侧窗口是否要收缩
-            while ( valid == need.size() ) {
-                // 在这里更新最小覆盖子串
-                if ( r - l < len ) {
-                    start = l;
-                    len = r - l;
+        }
+
+        int l = 0, r = 0, formed = 0;
+        Map<Character, Integer> windowCounts = new HashMap<Character, Integer>();
+        int[] ans = { -1, 0, 0 };
+
+        // Look for the characters only in the filtered list instead of entire s.
+        // This helps to reduce our search.
+        // Hence, we follow the sliding window approach on as small list.
+        while (r < filteredS.size()) {
+            char c = filteredS.get(r).getValue();
+            int count = windowCounts.getOrDefault(c, 0);
+            windowCounts.put(c, count + 1);
+
+            if (dictT.containsKey(c) && windowCounts.get(c).intValue() == dictT.get(c).intValue()) {
+                formed++;
+            }
+
+            // Try and contract the window till the point where it ceases to be 'desirable'.
+            while (l <= r && formed == required) {
+                c = filteredS.get(l).getValue();
+
+                // Save the smallest window until now.
+                int end = filteredS.get(r).getKey();
+                int start = filteredS.get(l).getKey();
+                if (ans[0] == -1 || end - start + 1 < ans[0]) {
+                    ans[0] = end - start + 1;
+                    ans[1] = start;
+                    ans[2] = end;
                 }
-                // d 是将移出窗口的字符
-                char d = s.charAt( l );
-                // 左移窗口
+
+                windowCounts.put(c, windowCounts.get(c) - 1);
+                if (dictT.containsKey(c) && windowCounts.get(c).intValue() < dictT.get(c).intValue()) {
+                    formed--;
+                }
                 l++;
-                // 进行窗口内数据的一系列更新
-                if ( need.containsKey( d ) ) {
-                    if ( window.get( d ).equals( need.get( d ) ) ) {
-                        valid--;
-                    }
-                    window.put( d, window.get( d ) - 1 );
-                }
             }
+            r++;
         }
-
-        return len == Integer.MAX_VALUE ? "" : s.substring( start, start+len );
+        return ans[0] == -1 ? "" : s.substring(ans[1], ans[2] + 1);
     }
 }
