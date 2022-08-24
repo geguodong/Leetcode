@@ -1,12 +1,12 @@
-// O(NlogN) O(N)
-
+// O(nlogn)
+// O(n)
 class Solution {
     private class LargerNumberComparator implements Comparator<String> {
         @Override
         public int compare(String a, String b) {
             String order1 = a + b;
             String order2 = b + a;
-            return order2.compareTo(order1);
+           return order2.compareTo(order1);
         }
     }
 
@@ -18,7 +18,9 @@ class Solution {
         }
 
         // Sort strings according to custom comparator.
-        Arrays.sort(asStrs, new LargerNumberComparator());
+        Arrays.sort(asStrs, (a, b) -> (
+            (b + a).compareTo(a + b)
+        ));
 
         // If, after being sorted, the largest number is `0`, the entire number
         // is zero.
