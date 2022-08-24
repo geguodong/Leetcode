@@ -1,5 +1,5 @@
-// Count Sort + HashMap
-// O(NKlogK) O(NK) where NN is the length of strs, and KK is the maximum length of a string in strs
+// o(nk)
+// o(nk)
 class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
         if (strs.length == 0) return new ArrayList();
