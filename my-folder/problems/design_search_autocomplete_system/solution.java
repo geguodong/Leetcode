@@ -1,110 +1,64 @@
 class AutocompleteSystem {
-    Map<String, Integer> map;
-    class Trie{
-        Trie[] links = new Trie[27];
-        PriorityQueue<String> pq = new PriorityQueue<>((a,b)->{
-            int check = map.get(b)-map.get(a);
-            if(check==0) {
-                return a.compareTo(b);
-            }   
-            return check;
-        });
-    }
-    
-    Trie root;
+
+    private Trie root;
+    private Trie tmp; //tmp = current searching node
+    private StringBuilder sb;
+    private Map<String, Integer> tMap;
     public AutocompleteSystem(String[] sentences, int[] times) {
-        map = new HashMap<>();
+        sb = new StringBuilder();
         root = new Trie();
-        for(int i=0;i<times.length;i++) {
-            insertIntotrie(sentences[i], times[i]);
-        }       
-    }
-    
-    public void insertIntotrie(String key, int val){
-        map.put(key,val);
-        Trie temp = root;
-        for(char c: key.toCharArray()){
-            int idx=0;
-            if(c==' ') {
-               idx=26;
-            } else {
-               idx = c-'a'; 
-            }
-                
+        tMap = new HashMap<>();
+        tmp = root;
 
-            if(temp.links[idx]==null){
-                temp.links[idx] = new Trie();
-                temp = temp.links[idx];
-                temp.pq.add(key);
-            }else{
-                temp = temp.links[idx];
-                temp.pq.add(key);
-            }
-        }   
-    }
-    
-    public void updateTrie(String key){
-        Trie temp = root;
-        for(char c: key.toCharArray()){
-            int idx=0;
-            if(c==' ') idx=26;
-            else idx = c-'a';
-
-            if(temp.links[idx]==null){
-                temp.links[idx] = new Trie();
-                temp = temp.links[idx];
-                temp.pq.remove(key);
-                temp.pq.add(key);
-            }else{
-                temp = temp.links[idx];
-                temp.pq.remove(key);
-                temp.pq.add(key);
-            }
-        }   
-    }
-    
-    public void dfs(String key, List<String> result){
-        Trie temp = root;
-        for(char c: key.toCharArray()){
-            int idx=0;
-            if(c==' ') {
-                idx=26;
-            } else {
-                idx = c-'a';
-            }
-
-            if(temp.links[idx]==null){
-                return;
-            } else {
-                temp = temp.links[idx];
-            }
-        }
-        
-        PriorityQueue<String> pq = new PriorityQueue<>(temp.pq);
-        int i=0;
-        while(i<temp.pq.size() && i<3){
-            result.add(pq.poll());
-            i++;
+        int i = 0;
+        for (String s : sentences){
+            addWord(s, times[i++]); //call addWord function
         }
     }
 
-    StringBuilder in = new StringBuilder();
     public List<String> input(char c) {
-        List<String> result = new ArrayList<>();
-        if(c=='#'){
-            if(map.containsKey(in.toString())){
-                map.put(in.toString(), map.get(in.toString())+1);
-                updateTrie(in.toString());
-            } else {
-                insertIntotrie(in.toString(), 1);
-            }    
-            in.setLength(0);
-            return result;
+        List<String> ans = new ArrayList<>();
+        if (c == '#'){
+            addWord(sb.toString(), 1);
+            sb.setLength(0);
+            tmp = root;
+            return ans;
         }
-        
-        in.append(c);
-        dfs(in.toString(), result);
-        return result;
+
+        if (tmp != null) {
+            tmp = tmp.nodes[c];
+        }
+            
+        sb.append(c);
+        return tmp == null? List.of() : tmp.top;
+    }
+
+    private void addWord(String s, int cnt){
+        tMap.put(s, tMap.getOrDefault(s, 0) + cnt);
+        Trie cur = root;
+        for (char ch : s.toCharArray()){
+            if (cur.nodes[ch] == null) {
+                cur.nodes[ch] = new Trie();
+            }    
+            cur = cur.nodes[ch];
+            if (!cur.top.contains(s)) {
+                cur.top.add(s);
+            } 
+            Collections.sort(cur.top, (a, b) -> {
+                return tMap.get(a) == tMap.get(b)? a.compareTo(b) : tMap.get(b) - tMap.get(a);
+            });
+            if (cur.top.size() > 3) cur.top.remove(3); //remove the last one if needed. O(1) operation for removing the last element in a list
+        }
+    }
+
+    private class Trie{
+        Trie[] nodes;
+        List<String> top;
+
+        Trie(){
+            nodes = new Trie[128];
+            top = new ArrayList<>();
+        }
     }
 }
 
