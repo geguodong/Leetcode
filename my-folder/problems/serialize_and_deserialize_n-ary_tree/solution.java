@@ -21,7 +21,6 @@ class Codec {
 
     // Encodes a tree to a single string.
     public String serialize(Node root) {
-        
         if (root == null) {
             return "";
         }
@@ -31,8 +30,7 @@ class Codec {
         return sb.toString();
     }
     
-    private void _serializeHelper(Node root, StringBuilder sb) {
-        
+    private void _serializeHelper(Node root, StringBuilder sb) {     
         // Queue to perform a level order traversal of the tree
         Queue<Node> q = new LinkedList<Node>();
         
