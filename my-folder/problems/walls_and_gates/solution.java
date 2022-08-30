@@ -3,12 +3,7 @@
 class Solution {
     private static final int EMPTY = Integer.MAX_VALUE;
     private static final int GATE = 0;
-    private static final List<int[]> DIRECTIONS = Arrays.asList(
-            new int[] { 1,  0},
-            new int[] {-1,  0},
-            new int[] { 0,  1},
-            new int[] { 0, -1}
-    );
+    private int[][] directions = new int[][]{{-1,0}, {1,0}, {0,-1}, {0,1}};
 
     public void wallsAndGates(int[][] rooms) {
         int m = rooms.length;
@@ -26,7 +21,7 @@ class Solution {
             int[] point = q.poll();
             int row = point[0];
             int col = point[1];
-            for (int[] direction : DIRECTIONS) {
+            for (int[] direction : directions) {
                 int r = row + direction[0];
                 int c = col + direction[1];
                 if (r < 0 || c < 0 || r >= m || c >= n || rooms[r][c] != EMPTY) {
