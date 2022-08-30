@@ -29,6 +29,7 @@ class Solution {
                     StringBuilder sb = new StringBuilder();
                     // 初始的方向可以随便写，不影响正确性
                     dfs(grid, i, j, sb, 666);
+                    System.out.println(sb.toString());
                     islands.add(sb.toString());
                 }
             }
