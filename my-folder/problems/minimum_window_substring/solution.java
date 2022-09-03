@@ -7,14 +7,11 @@ class Solution {
         }
 
         Map<Character, Integer> dictT = new HashMap<Character, Integer>();
-
         for (int i = 0; i < t.length(); i++) {
-            int count = dictT.getOrDefault(t.charAt(i), 0);
-            dictT.put(t.charAt(i), count + 1);
+            dictT.put(t.charAt(i), dictT.getOrDefault(t.charAt(i), 0) + 1);
         }
 
         int required = dictT.size();
-
         // Filter all the characters from s into a new list along with their index.
         // The filtering criteria is that the character should be present in t.
         List<Pair<Integer, Character>> filteredS = new ArrayList<Pair<Integer, Character>>();
