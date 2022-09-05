@@ -1,21 +1,11 @@
-/*
-Time complexity : O(n). Single loop upto nn is required to calculate n^th
-  fibonacci number.
-Space complexity : O(1). Constant space is used.
-*/
-public class Solution {
+class Solution {
     public int climbStairs(int n) {
-        // base case
-        if (n == 1) {
-            return 1;
+        int[] ways = new int[n + 1];
+        ways[0] = 1;
+        ways[1] = 1;
+        for(int i = 2; i <= n; i++) {
+            ways[i] = ways[i - 1] + ways[i - 2];
         }
-        int first = 1;
-        int second = 2;
-        for (int i = 3; i <= n; i++) {
-            int third = first + second;
-            first = second;
-            second = third;
-        }
-        return second;
+        return ways[n];
     }
 }
