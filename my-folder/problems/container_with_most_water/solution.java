@@ -1,21 +1,16 @@
-/*
-Two pointer
-
-Note : different with another problem ~ 8--8 + 8 ~ 7
-Time complexity : O(n). Single pass.
-Space complexity : O(1). Constant space is used.
-*/
-
-public class Solution {
+class Solution {
     public int maxArea(int[] height) {
-        int maxarea = 0, l = 0, r = height.length - 1;
-        while (l < r) {
-            maxarea = Math.max(maxarea, Math.min(height[l], height[r]) * (r - l));
-            if (height[l] < height[r])
-                l++;
-            else
-                r--;
+        int max = Integer.MIN_VALUE;
+        int left = 0;
+        int right = height.length - 1;
+        while(left < right) {
+            max = Math.max(max, Math.min(height[left], height[right]) * (right - left));
+            if(height[left] < height[right]) {
+                left++;
+            } else {
+                right--;
+            }
         }
-        return maxarea;
+        return max;
     }
 }
