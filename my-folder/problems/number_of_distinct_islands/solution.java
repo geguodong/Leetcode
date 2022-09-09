@@ -1,3 +1,4 @@
+// O(MN) O(MN)
 class Solution {
     void dfs(int[][] grid, int i, int j, StringBuilder sb, int dir) {
         int m = grid.length, n = grid[0].length;
