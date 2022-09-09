@@ -13,11 +13,15 @@
  *     }
  * }
  */
+// O(N)  since we visit each node not more than 2 times
+// O(H) H height, to keep recursion stack average logN, worst O(N)
 class Solution {
   int max_sum = Integer.MIN_VALUE;
 
   public int max_gain(TreeNode node) {
-    if (node == null) return 0;
+    if (node == null) {
+        return 0;
+    }
 
     // max sum on the left and right sub-trees of node
     int left_gain = Math.max(max_gain(node.left), 0);
