@@ -1,4 +1,5 @@
-
+// Time : create O(T) get O(T)
+// Space : create O(T) get O(1)
 class FileSystem {
     // The TrieNode data structure.
     class TrieNode {      
@@ -23,7 +24,8 @@ class FileSystem {
         // Start "curr" from the root node.
         TrieNode cur = root;   
         // Iterate over all the components.
-        for (int i = 1; i < components.length; i++) { 
+        for (int i = 1; i < components.length; i++) {
+            System.out.println("component : " + components[i]);
             String currentComponent = components[i];
             // For each component, we check if it exists in the current node's dictionary.
             if (!cur.map.containsKey(currentComponent)) {        
