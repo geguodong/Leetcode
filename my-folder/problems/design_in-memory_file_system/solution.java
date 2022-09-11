@@ -59,10 +59,10 @@ public class FileSystem {
     public String readContentFromFile(String filePath) {
         File t = root;
         String[] d = filePath.split("/");
-        for (int i = 1; i < d.length - 1; i++) {
+        for (int i = 1; i < d.length; i++) {
             t = t.files.get(d[i]);
         }
-        return t.files.get(d[d.length - 1]).content;
+        return t.content;
     }
 }
 
