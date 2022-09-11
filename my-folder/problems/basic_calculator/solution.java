@@ -1,5 +1,3 @@
-// Stack and No String Reversal
-// O(n) O(n)
 class Solution {
     public int calculate(String s) {
 
