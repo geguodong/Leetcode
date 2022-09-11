@@ -1,5 +1,4 @@
-// traverse
-// O(MN) O(1)
+// o(mn) o(1)
 class Solution {
     public void gameOfLife(int[][] board) {
 
@@ -22,7 +21,6 @@ class Solution {
                         if (!(neighbors[i] == 0 && neighbors[j] == 0)) {
                             int r = (row + neighbors[i]);
                             int c = (col + neighbors[j]);
-
                             // Check the validity of the neighboring cell.
                             // and whether it was originally a live cell.
                             if ((r < rows && r >= 0) && (c < cols && c >= 0) && (Math.abs(board[r][c]) == 1)) {
