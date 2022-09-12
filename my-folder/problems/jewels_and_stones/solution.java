@@ -1,15 +1,21 @@
+// O(M + N)
+// O(M)
 class Solution {
     public int numJewelsInStones(String jewels, String stones) {
-        Set<Character> set = new HashSet<>();
-        for(char c : jewels.toCharArray()) {
-            set.add(c);
+        if(jewels == null || jewels.length() == 0 || stones == null || stones.length() == 0) {
+            return 0;
         }
-        int count = 0;
+        Set<Character> jewel = new HashSet<>();
+        for(char c : jewels.toCharArray()) {
+            jewel.add(c);
+        }
+        
+        int res = 0;
         for(char c : stones.toCharArray()) {
-            if(set.contains(c)) {
-                count++;
+            if(jewel.contains(c)) {
+                res++;
             }
         }
-        return count;
+        return res;
     }
 }
