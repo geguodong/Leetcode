@@ -1,4 +1,4 @@
-// T : o(N), S : O(N)
+// T : O(N), S : O(N)
 class Solution {
     public int[] twoSum(int[] nums, int target) {
         Map<Integer, Integer> map = new HashMap<>();
