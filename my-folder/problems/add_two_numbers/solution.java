@@ -8,13 +8,13 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
-/*
+ /*
 Time complexity : O(max(m,n)). Assume that mm and nn represents the length of l1 and l2 respectively, the algorithm above iterates at most max(m,n) times.
 
 Space complexity : O(max(m,n)). The length of the new list is at most max(m,n)+1.
 */
 
-public class Solution {
+class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode dummyHead = new ListNode(0);
         ListNode p = l1, q = l2, curr = dummyHead;
@@ -34,5 +34,4 @@ public class Solution {
         }
         return dummyHead.next;
     }
-    
 }
